@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Flight Comparison</title>
+</head>
+<body>
+    <header>
+        <h1>Flight Comparison</h1>
+    </header>
+    <main>
+        <form id="flightForm">
+            <label for="origin">Origin:</label>
+            <input type="text" id="origin" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" required>
+
+            <label for="departureDate">Departure Date:</label>
+            <input type="date" id="departureDate" required>
+
+            <button type="button" onclick="searchFlights()">Search Flights</button>
+        </form>
+
+        <div id="resultsContainer"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Flight Comparison</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+main {
+    padding: 2em;
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+input, button {
+    padding: 0.5em;
+}
+function searchFlights() {
+    const origin = document.getElementById('origin').value;
+    const destination = document.getElementById('destination').value;
+    const departureDate = document.getElementById('departureDate').value;
+
+    // Simulate flight search results (replace this with real API calls)
+    const results = [
+        { airline: 'Airline A', price: '$300', departureTime: '10:00 AM' },
+        { airline: 'Airline B', price: '$320', departureTime: '11:30 AM' },
+        { airline: 'Airline C', price: '$280', departureTime: '02:00 PM' },
+    ];
+
+    displayResults(results);
+}
+
+function displayResults(results) {
+    const resultsContainer = document.getElementById('resultsContainer');
+    resultsContainer.innerHTML = '';
+
+    if (results.length === 0) {
+        resultsContainer.innerHTML = '<p>No flights found.</p>';
+    } else {
+        results.forEach(result => {
+            const flightCard = document.createElement('div');
+            flightCard.classList.add('flightCard');
+            flightCard.innerHTML = `
+                <p>Airline: ${result.airline}</p>
+                <p>Price: ${result.price}</p>
+                <p>Departure Time: ${result.departureTime}</p>
+            `;
+            resultsContainer.appendChild(flightCard);
+        });
+    }
+}
